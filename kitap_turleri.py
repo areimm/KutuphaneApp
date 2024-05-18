@@ -6,7 +6,7 @@ class KitapTurleri:
         if self.baglanti:
             try:
                 cursor = self.baglanti.cursor()
-                cursor.execute("INSERT INTO kitap_turleri (tur_ad) VALUES (?)",
+                cursor.execute("INSERT INTO kitapTurleri (tur_ad) VALUES (?)",
                                (tur_ad,))
                 self.baglanti.commit()
                 print("Kitap türü eklendi.")
@@ -20,7 +20,7 @@ class KitapTurleri:
         if self.baglanti:
             try:
                 cursor = self.baglanti.cursor()
-                cursor.execute("DELETE FROM kitap_turleri WHERE tur_id = ?", (tur_id,))
+                cursor.execute("DELETE FROM kitapTurleri WHERE tur_id = ?", (tur_id,))
                 self.baglanti.commit()
                 print("Kitap türü silindi.")
             except Exception as e:
@@ -33,9 +33,9 @@ class KitapTurleri:
         if self.baglanti:
             try:
                 cursor = self.baglanti.cursor()
-                cursor.execute("SELECT * FROM kitap_turleri")
-                kitap_turleri = cursor.fetchall()
-                for kitap_turu in kitap_turleri:
+                cursor.execute("SELECT * FROM kitapTurleri")
+                kitapTurleri = cursor.fetchall()
+                for kitap_turu in kitapTurleri:
                     print(kitap_turu)
             except Exception as e:
                 print("Kitap türleri listelenemedi:", e)
@@ -47,7 +47,7 @@ class KitapTurleri:
         if self.baglanti:
             try:
                 cursor = self.baglanti.cursor()
-                cursor.execute("UPDATE kitap_turleri SET tur_ad = ? WHERE tur_id = ?",
+                cursor.execute("UPDATE kitapTurleri SET tur_ad = ? WHERE tur_id = ?",
                                (yeni_ad, tur_id))
                 self.baglanti.commit()
                 print("Kitap türü güncellendi.")
