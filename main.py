@@ -146,17 +146,5 @@ while True:
     else:
         print('Geçersiz seçim')
         
-
-
-
-
-def kitapbilgileri_menu():
-     print('\n Kitap Bilgileri Menüsü')
-     print('1. Kitap Ekle')
-     print('2. Kitap Güncelle')
-     print('3. Kitap Sil')
-     print('4. Kitapları Listele')
-     print('5. Ana Menü')
-     secim = input('Seçiminizi yapınız (1-5): ')
      
      
