@@ -1,20 +1,4 @@
-# class KitapOdunc:
-    # def __init__(self,baglanti):
-    #     self.baglanti = baglanti
-        
-    # def ekle(self, uye_id, ISBN_No, odunc_tarihi, geri_verme_tarihi):
-    #     if self.baglanti:
-    #         try:
-    #             cursor = self.baglanti.cursor()
-    #             cursor.execute("INSERT INTO kitapOdunc (uye_id, ISBN_No, odunc_tarihi, geri_verme_tarihi) VALUES (?,?,?,?)",
-    #                            (uye_id, ISBN_No, odunc_tarihi, geri_verme_tarihi))
-    #             self.baglanti.commit()
-    #             print("Kitap ödünç eklendi.")
-    #         except Exception as e:
-    #             print("Kitap ödünç eklenemedi:", e)
-    #     else:
-    #         print("Veritabanı bağlantısı yok.")
-    
+
 class KitapOdunc:
     def __init__(self, baglanti):
         self.baglanti = baglanti
@@ -77,3 +61,22 @@ class KitapOdunc:
                 print("Kitap ödünç güncellenemedi:", e)
         else:
             print("Veritabanı bağlantısı yok.")        
+
+
+# class KitapOdunc:
+    # def __init__(self,baglanti):
+    #     self.baglanti = baglanti
+        
+    # def ekle(self, uye_id, ISBN_No, odunc_tarihi, geri_verme_tarihi):
+    #     if self.baglanti:
+    #         try:
+    #             cursor = self.baglanti.cursor()
+    #             cursor.execute("INSERT INTO kitapOdunc (uye_id, ISBN_No, odunc_tarihi, geri_verme_tarihi) VALUES (?,?,?,?)",
+    #                            (uye_id, ISBN_No, odunc_tarihi, geri_verme_tarihi))
+    #             self.baglanti.commit()
+    #             print("Kitap ödünç eklendi.")
+    #         except Exception as e:
+    #             print("Kitap ödünç eklenemedi:", e)
+    #     else:
+    #         print("Veritabanı bağlantısı yok.")
+    
