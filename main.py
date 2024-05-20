@@ -93,14 +93,17 @@ def kitapodunc_menu():
         print('\n Kitap Ödünç Menüsü')
         print('1. Kitap Ödünç Ver')
         print('2. Kitap Ödünç İade')
-        print('3. Ödünç Kitapları Listele')
+        print('3. Ödünç Kitapları Güncelle')
+        print('4. Ödünç Kitapları Listele')
         secim = input('Seçiminizi yapınız (1-3): ')
         
         if secim == '1':
-            kitap_odunc.odunc_ver(input('Kitap ID '), input('Üye ID '), input('Ödünç Tarihi '), input('Teslim Tarihi '))
+            kitap_odunc.ekle(input('Üye ID '), input('ISBN No '), input('Ödünç Alma Tarihi '), input('Geri Verme Tarihi '))
         elif secim == '2':
-            kitap_odunc.iade(input('Kitap ID '), input('Üye ID '))
+            kitap_odunc.sil(input('Ödünç ID '))
         elif secim == '3':
+            kitap_odunc.guncelle(input('Ödünç ID '), input('Üye ID '), input('ISBN No '), input('Ödünç Alma Tarihi '), input('Geri Verme Tarihi '))
+        elif secim == '4':
             kitap_odunc.listele()
         else:
             print('Geçersiz seçim')

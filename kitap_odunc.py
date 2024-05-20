@@ -4,31 +4,30 @@ class KitapOdunc:
         self.baglanti = baglanti
 
     def ekle(self, uye_id, ISBN_No, odunc_tarihi, geri_verme_tarihi):
-        if self.baglanti:
-            try:
-                cursor = self.baglanti.cursor()
-                
-                # Kitabın ödünç verilmiş olup olmadığını kontrol eden sorgu
-                cursor.execute("SELECT COUNT(*) FROM kitapOdunc WHERE ISBN_No = ? AND geri_verme_tarihi IS NULL", (ISBN_No,))
-                count = cursor.fetchone()[0]
-                
-                if count > 0:
-                    print("Kitap zaten ödünç verilmiş.")
-                else:
-                    cursor.execute("INSERT INTO kitapOdunc (uye_id, ISBN_No, odunc_alma_tarihi, geri_verme_tarihi) VALUES (?,?,?,?)",
-                                   (uye_id, ISBN_No, odunc_tarihi, geri_verme_tarihi))
-                    self.baglanti.commit()
-                    print("Kitap ödünç eklendi.")
-            except Exception as e:
-                print("Kitap ödünç eklenemedi:", e)
-        else:
-            print("Veritabanı bağlantısı yok.")
+     if self.baglanti:
+        try:
+            cursor = self.baglanti.cursor()
+            # Kitabın ödünç verilmiş olup olmadığını kontrol eden sorgu
+            cursor.execute("SELECT COUNT(*) FROM kitapOdunc WHERE ISBN_No = ?", (ISBN_No,))
+            count = cursor.fetchone()[0]
+
+            if count > 0:
+                print("Kitap zaten ödünç verilmiş.")
+            else:
+                cursor.execute("INSERT INTO kitapOdunc (uye_id, ISBN_No, odunc_alma_tarihi, geri_verme_tarihi) VALUES (?,?,?,?)",
+                               (uye_id, ISBN_No, odunc_tarihi, geri_verme_tarihi))
+                self.baglanti.commit()
+                print("Kitap ödünç eklendi.")
+        except Exception as e:
+            print("Kitap ödünç eklenemedi:", e)
+     else:
+        print("Veritabanı bağlantısı yok.")
             
     def sil(self, id):
         if self.baglanti:
             try:
                 cursor = self.baglanti.cursor()
-                cursor.execute("DELETE FROM kitapOdunc WHERE id=?", (id,))
+                cursor.execute("DELETE FROM kitapOdunc WHERE odunc_id=?", (id,))
                 self.baglanti.commit()
                 print("Kitap ödünç silindi.")
             except Exception as e:
@@ -40,7 +39,7 @@ class KitapOdunc:
         if self.baglanti:
             try:
                 cursor = self.baglanti.cursor()
-                cursor.execute("SELECT ko.odunc_id, ko.uye_id, ko.ISBN_No, ko.odunc_alma_tarihi, ko.geri_verme_tarihi, kb.kitap_adi, u.uye_ad, u.uye_soyad FROM kitapOdunc ko INNER JOIN kitapBilgileri kb ON ko.ISBN_No = kb.ISBN_No  INNER JOIN uye u ON ko.uye_id = u.uye_id;")
+                cursor.execute("SELECT ko.odunc_id, u.uye_ad, u.uye_soyad , kb.kitap_adi, ko.odunc_alma_tarihi, ko.geri_verme_tarihi FROM kitapOdunc ko INNER JOIN kitapBilgileri kb ON ko.ISBN_No = kb.ISBN_No  INNER JOIN uye u ON ko.uye_id = u.uye_id;")
                 odunc_listesi = cursor.fetchall()
                 for odunc in odunc_listesi:
                     print(odunc)
