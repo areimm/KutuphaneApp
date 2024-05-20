@@ -20,7 +20,7 @@ class KitapBilgileri:
         if self.baglanti:
             try:
                 cursor = self.baglanti.cursor()
-                cursor.execute("SELECT kb.ISBN_No,kb.kitap_adi,kb.kitap_yazari,kb.basimYili,kt.tur_adi,ye.yayinevi_adi FROM kitapBilgileri kb INNER JOIN kitapTurleri kt ON kb.tur_id=kt.tur_id INNER JOIN yayinEvleri ye ON kb.yayinevi_id=ye.yayinevi_id")
+                cursor.execute("SELECT kb.id,kb .ISBN_No,kb.kitap_adi,kb.kitap_yazari,kb.basimYili,kt.tur_adi,ye.yayinevi_adi FROM kitapBilgileri kb INNER JOIN kitapTurleri kt ON kb.tur_id=kt.tur_id INNER JOIN yayinEvleri ye ON kb.yayinevi_id=ye.yayinevi_id")
                 kitaplar = cursor.fetchall()
                 for kitap in kitaplar:
                     print(kitap)
@@ -42,12 +42,12 @@ class KitapBilgileri:
             print("Veritabanı bağlantısı yok.")
             
             
-    def guncelle(self, ISBN_No, kitap_adi, kitap_yazari, basimYili, tur_id, yayinevi_id):
+    def guncelle(self, ISBN_No, yeni_kitap_adi, yeni_kitap_yazari, yeni_basimYili, yeni_tur_id, yeni_yayinevi_id):
         if self.baglanti:
             try:
                 cursor = self.baglanti.cursor()
-                cursor.execute("UPDATE kitapBilgileri SET kitap_adi=?, kitap_yazari=?, basimYili=?, tur_id=?, yayinevi_id=? WHERE ISBN_No=?",
-                               (kitap_adi, kitap_yazari, basimYili, tur_id, yayinevi_id, ISBN_No))
+                cursor.execute("UPDATE kitapBilgileri SET kitap_adi = ?, kitap_yazari = ?, basimYili = ?, tur_id = ?, yayinevi_id = ? WHERE ISBN_No = ?",
+                               ( yeni_kitap_adi, yeni_kitap_yazari, yeni_basimYili, yeni_tur_id,yeni_yayinevi_id,ISBN_No))
                 self.baglanti.commit()
                 print("Kitap bilgileri güncellendi.")
             except Exception as e:

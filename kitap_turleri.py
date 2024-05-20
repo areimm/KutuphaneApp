@@ -2,12 +2,12 @@ class KitapTurleri:
     def __init__(self,baglanti):
         self.baglanti = baglanti
         
-    def ekle(self, tur_ad):
+    def ekle(self, tur_adi):
         if self.baglanti:
             try:
                 cursor = self.baglanti.cursor()
-                cursor.execute("INSERT INTO kitapTurleri (tur_ad) VALUES (?)",
-                               (tur_ad,))
+                cursor.execute("INSERT INTO kitapTurleri (tur_adi) VALUES (?)",
+                               (tur_adi,))
                 self.baglanti.commit()
                 print("Kitap türü eklendi.")
             except Exception as e:
@@ -47,7 +47,7 @@ class KitapTurleri:
         if self.baglanti:
             try:
                 cursor = self.baglanti.cursor()
-                cursor.execute("UPDATE kitapTurleri SET tur_ad = ? WHERE tur_id = ?",
+                cursor.execute("UPDATE kitapTurleri SET tur_adi = ? WHERE tur_id = ?",
                                (yeni_ad, tur_id))
                 self.baglanti.commit()
                 print("Kitap türü güncellendi.")
